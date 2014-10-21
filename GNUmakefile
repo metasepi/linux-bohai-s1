@@ -5,6 +5,7 @@ NUMCPU      = $(shell cat /proc/cpuinfo | grep -c "^processor")
 all: build
 
 build: .config
+	[ ! -z "${RASPI_PREFIX}" ]
 	${RASPI_PREFIX}gcc --version
 	${MAKE} -j ${NUMCPU} -f Makefile ARCH=arm CROSS_COMPILE=${RASPI_PREFIX}
 
