@@ -1,0 +1,23 @@
+before_install:
+  - date
+  - cat /proc/cpuinfo
+  - cd ${HOME}
+  # Setup ARM cross toolchain
+  - git clone https://github.com/raspberrypi/tools.git
+  - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin/arm-bcm2708hardfp-linux-gnueabi-
+  # Get ATS2
+  - git clone https://github.com/githwxi/ATS-Postiats.git
+  # Build ATS1
+  - export ATSHOME=${HOME}/ats-lang-anairiats-0.2.11
+  - export ATSHOMERELOC=ATS-0.2.11
+  - ./ATS-Postiats/travis-ci/setup.sh 0.2.11
+  # Build ATS2
+  - export PATSHOME=${HOME}/ATS-Postiats
+  - export PATSHOMERELOC=${PATSHOME}
+  - export PATH=${PATH}:${PATSHOME}/bin
+  - cd ${PATSHOME} && make -f codegen/Makefile_atslib && make -f Makefile_devl src_depend && make -f Makefile_devl all
+script:
+  - cd ${TRAVIS_BUILD_DIR}
+  - make
+after_script:
+  - date
