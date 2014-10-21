@@ -6,6 +6,7 @@ before_install:
   # Setup ARM cross toolchain
   - git clone https://github.com/raspberrypi/tools.git
   - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin/arm-bcm2708hardfp-linux-gnueabi-
+  - ls tools/arm*
   # Get ATS2
   - git clone https://github.com/githwxi/ATS-Postiats.git
   # Build ATS1
