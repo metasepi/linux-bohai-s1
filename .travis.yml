@@ -3,6 +3,7 @@ before_install:
   - cat /proc/cpuinfo
   - cd ${HOME}
   - sudo apt-get -qq -y install libgmp-dev
+  - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
   # Setup ARM cross toolchain
   - git clone https://github.com/raspberrypi/tools.git
   - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
@@ -17,9 +18,9 @@ before_install:
   - export PATSHOME=${HOME}/ATS-Postiats
   - export PATSHOMERELOC=${PATSHOME}
   - export PATH=${PATH}:${PATSHOME}/bin
-  - cd ${PATSHOME} && make -f codegen/Makefile_atslib && make -f Makefile_devl src_depend && make -f Makefile_devl all
+  - cd ${PATSHOME} && make -f codegen/Makefile_atslib && make -f Makefile_devl src_depend && make -f Makefile_devl -j ${NUMCPU} all
 script:
   - cd ${TRAVIS_BUILD_DIR}
-  - make
+  - make -j ${NUMCPU}
 after_script:
   - date
