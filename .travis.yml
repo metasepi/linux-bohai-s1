@@ -14,11 +14,13 @@ before_install:
   - export ATSHOME=${HOME}/ats-lang-anairiats-0.2.11
   - export ATSHOMERELOC=ATS-0.2.11
   - ./ATS-Postiats/travis-ci/setup.sh 0.2.11
+  - atsopt --version
   # Build ATS2
   - export PATSHOME=${HOME}/ATS-Postiats
   - export PATSHOMERELOC=${PATSHOME}
   - export PATH=${PATH}:${PATSHOME}/bin
   - cd ${PATSHOME} && make -f codegen/Makefile_atslib && make -f Makefile_devl src_depend && make -f Makefile_devl -j ${NUMCPU} all
+  - patsopt --version
 script:
   - cd ${TRAVIS_BUILD_DIR}
   - make -j ${NUMCPU}
