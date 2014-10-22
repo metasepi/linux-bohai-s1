@@ -8,6 +8,7 @@ before_install:
   - git clone https://github.com/raspberrypi/tools.git
   - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
   - ${RASPI_PREFIX}gcc --version
+  - gcc --version
   # Get ATS2
   - git clone https://github.com/githwxi/ATS-Postiats.git
   # Build ATS1
