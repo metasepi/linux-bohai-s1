@@ -26,3 +26,27 @@ $ git clone https://github.com/metasepi/linux-bohai-s1.git
 $ cd linux-bohai-s1
 $ make
 ```
+
+## How to snatch Linux kernel with ATS2
+
+See following Hongwei comment.
+
+```
+If you are reading this message, then you have probably heard or read that ATS
+is good for safe systems programming. But you may not have seen low-level systems
+code written in ATS, right? There is a reason for this obvious irony for writing such code
+in ATS is very challenging. It took us a long time to learn the ropes.
+
+Now I want to write a little bit on how ATS can be used effectively to implement low-level
+systems. My focus here is on implementing device drivers for Linux. I will try to follow the
+following book:
+
+http://www.tldp.org/LDP/lkmpg/2.6/
+
+The code I use is to be stored at:
+
+https://github.com/githwxi/ATS-Postiats-contrib/tree/master/projects/MEDIUM/LinuxKerneling/
+
+For testing, I suggest that a qemu image be used. I will do a post on it later.
+```
+
