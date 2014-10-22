@@ -9,6 +9,7 @@ before_install:
   - export RASPI_PREFIX=arm-bcm2708hardfp-linux-gnueabi-
   - ls -lR `find tools -name "bin"`
   - which ${RASPI_PREFIX}gcc
+  - ${RASPI_PREFIX}gcc --version
   # Get ATS2
   - git clone https://github.com/githwxi/ATS-Postiats.git
   # Build ATS1
@@ -22,7 +23,7 @@ before_install:
   - cd ${PATSHOME} && make -f codegen/Makefile_atslib && make -f Makefile_devl src_depend && make -f Makefile_devl all
 script:
   - cd ${TRAVIS_BUILD_DIR}
-  - find ${HOME} -name arm-bcm2708hardfp-linux-gnueabi-gcc
+  - ${RASPI_PREFIX}gcc --version
   - make
 after_script:
   - date
