@@ -5,8 +5,10 @@ before_install:
   - sudo apt-get -qq -y install libgmp-dev
   # Setup ARM cross toolchain
   - git clone https://github.com/raspberrypi/tools.git
-  - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin/arm-bcm2708hardfp-linux-gnueabi-
+  - export PATH=${PATH}:${HOME}/tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin
+  - export RASPI_PREFIX=arm-bcm2708hardfp-linux-gnueabi-
   - ls -lR `find tools -name "bin"`
+  - which ${RASPI_PREFIX}gcc
   # Get ATS2
   - git clone https://github.com/githwxi/ATS-Postiats.git
   # Build ATS1
