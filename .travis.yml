@@ -3,6 +3,7 @@ before_install:
   - cat /proc/cpuinfo
   - cd ${HOME}
   - sudo apt-get -qq -y install libgmp-dev make xz-utils
+  - sudo apt-get -qq -y build-dep qemu
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
   # Setup emulation environment for Raspberry Pi
   - export QEMU_VER=2.1
