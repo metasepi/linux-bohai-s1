@@ -2,16 +2,15 @@ before_install:
   - date
   - cat /proc/cpuinfo
   - cd ${HOME}
-  - sudo apt-get -qq -y install libgmp-dev make xz-utils libfdt-dev seabios
+  - sudo apt-get -qq -y install libgmp-dev make xz-utils libfdt-dev
   - sudo apt-get -qq -y build-dep qemu
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
   # Setup emulation environment for Raspberry Pi
   - export QEMU_VER=2.1
   - wget http://cdn.debian.net/debian/pool/main/q/qemu/qemu_${QEMU_VER}+dfsg.orig.tar.xz
   - tar xfJ qemu_${QEMU_VER}+dfsg.orig.tar.xz
-  - (cd qemu-${QEMU_VER}.0 && ./configure --extra-cflags="-DCONFIG_QEMU_X86_DATAPATH='\"/usr/share/seabios\"'" --target-list=arm-softmmu)
+  - (cd qemu-${QEMU_VER}.0 && ./configure --disable-blobs --target-list=arm-softmmu)
   - (cd qemu-${QEMU_VER}.0 && make -j ${NUMCPU} | grep -v ' CC ')
-  - cp -a /usr/share/seabios/* qemu-${QEMU_VER}.0/pc-bios/
   - (cd qemu-${QEMU_VER}.0 && sudo make install)
   - qemu-system-arm --version
   - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
