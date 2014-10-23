@@ -5,7 +5,7 @@ all: build
 
 build: .config
 	[ ! -z "${RASPI_PREFIX}" ]
-	${MAKE} -f Makefile ARCH=arm CROSS_COMPILE=${RASPI_PREFIX} | grep -v ' CC '
+	${MAKE} -f Makefile ARCH=arm CROSS_COMPILE=${RASPI_PREFIX}
 
 .config: ${FILE_CONFIG}
 	cp ${FILE_CONFIG} .config
