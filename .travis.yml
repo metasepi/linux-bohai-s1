@@ -2,7 +2,8 @@ before_install:
   - date
   - cat /proc/cpuinfo
   - cd ${HOME}
-  - ${TRAVIS_BUILD_DIR}/metasepi/travis-ci/get-raspbian-img.sh &
+  - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
+  - unzip -x raspbian_latest.zip &
   - sudo apt-get -qq -y install libgmp-dev make xz-utils libfdt-dev
   - sudo apt-get -qq -y build-dep qemu
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
@@ -31,8 +32,8 @@ before_install:
   - (cd qemu-${QEMU_VER}.0 && make -j ${NUMCPU} | grep -v ' CC ')
   - (cd qemu-${QEMU_VER}.0 && sudo make install)
   - qemu-system-arm --version
-  # Expect get-raspbian-img.sh terminated
-  - file raspbian.img
+  ## Expect unzip raspbian_latest.zip terminated
+  - mv *raspbian.img raspbian.img
 script:
   - cd ${TRAVIS_BUILD_DIR}
   - make -j ${NUMCPU} | grep -v ' CC '
