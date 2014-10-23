@@ -2,7 +2,7 @@ before_install:
   - date
   - cat /proc/cpuinfo
   - cd ${HOME}
-  - sudo apt-get -qq -y install libgmp-dev qemu-system-arm
+  - sudo apt-get -qq -y install libgmp-dev
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
   # Setup emulation environment for Raspberry Pi
   - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
