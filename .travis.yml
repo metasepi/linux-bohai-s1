@@ -9,7 +9,7 @@ before_install:
   - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
   - wget http://wiki.qemu-project.org/download/qemu-${QEMU_VER}.tar.bz2
   - tar xfj qemu-${QEMU_VER}.tar.bz2
-  - cd qemu-${QEMU_VER} && ./configure && make -j ${NUMCPU} && make install
+  - cd qemu-${QEMU_VER} && ./configure && make -j ${NUMCPU} && sudo make install
   - qemu-system-arm --version
   # Setup ARM cross toolchain
   - git clone https://github.com/raspberrypi/tools.git
