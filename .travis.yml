@@ -8,7 +8,7 @@ before_install:
   - export QEMU_VER=2.1
   - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
   - wget http://cdn.debian.net/debian/pool/main/q/qemu/qemu_${QEMU_VER}+dfsg.orig.tar.xz
-  - tar xfJ qemu-${QEMU_VER}+dfsg.orig.tar.xz
+  - tar xfJ qemu_${QEMU_VER}+dfsg.orig.tar.xz
   - cd qemu-${QEMU_VER}.0 && ./configure && make -j ${NUMCPU} && sudo make install
   - qemu-system-arm --version
   # Setup ARM cross toolchain
