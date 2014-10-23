@@ -21,13 +21,13 @@ before_install:
   - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
   - ${RASPI_PREFIX}gcc --version
   - gcc --version
-  # Get ATS2
+  # Setup ATS2
   - git clone https://github.com/githwxi/ATS-Postiats.git
-  # Build ATS1
+  ## Build ATS1
   - export ATSHOME=${HOME}/ats-lang-anairiats-0.2.11
   - export ATSHOMERELOC=ATS-0.2.11
   - ./ATS-Postiats/travis-ci/setup.sh 0.2.11 | grep -v 'gcc -I'
-  # Build ATS2
+  ## Build ATS2
   - export PATSHOME=${HOME}/ATS-Postiats
   - export PATSHOMERELOC=${PATSHOME}
   - export PATH=${PATH}:${PATSHOME}/bin
