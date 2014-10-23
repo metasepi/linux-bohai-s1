@@ -2,10 +2,15 @@ before_install:
   - date
   - cat /proc/cpuinfo
   - cd ${HOME}
-  - sudo apt-get -qq -y install libgmp-dev
+  - sudo apt-get -qq -y install libgmp-dev make bzip2
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
   # Setup emulation environment for Raspberry Pi
+  - export QEMU_VER=2.1.2
   - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
+  - wget http://wiki.qemu-project.org/download/qemu-${QEMU_VER}.tar.bz2
+  - tar xfj qemu-${QEMU_VER}.tar.bz2
+  - cd qemu-${QEMU_VER} && ./configure && make -j ${NUMCPU} && make install
+  - qemu-system-arm --version
   # Setup ARM cross toolchain
   - git clone https://github.com/raspberrypi/tools.git
   - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
