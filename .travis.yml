@@ -3,7 +3,7 @@ before_install:
   - cat /proc/cpuinfo
   - cd ${HOME}
   - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
-  - unzip -x raspbian_latest.zip &
+  - unzip -x raspbian_latest.zip
   - sudo apt-get -qq -y install libgmp-dev make xz-utils libfdt-dev
   - sudo apt-get -qq -y build-dep qemu
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
