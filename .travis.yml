@@ -15,11 +15,9 @@ before_install:
   # Setup ATS2
   - git clone https://github.com/githwxi/ATS-Postiats.git
   ## Build ATS1
-  - sudo apt-get -qq -y install ats-lang-anairiats
-  - export ATSHOME=/usr
-#  - export ATSHOME=${HOME}/ats-lang-anairiats-0.2.11
-#  - export ATSHOMERELOC=ATS-0.2.11
-#  - ./ATS-Postiats/travis-ci/setup.sh 0.2.11 | grep -v 'gcc -I'
+  - export ATSHOME=${HOME}/ats-lang-anairiats-0.2.11
+  - export ATSHOMERELOC=ATS-0.2.11
+  - ./ATS-Postiats/travis-ci/setup.sh 0.2.11 | grep -v 'gcc -I'
   ## Build ATS2
   - export PATSHOME=${HOME}/ATS-Postiats
   - export PATSHOMERELOC=${PATSHOME}
