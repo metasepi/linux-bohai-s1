@@ -54,3 +54,19 @@ For testing, I suggest that a qemu image be used. I will do a post on it later.
 
 * [Compiling an ARM1176 kernel for QEMU (Tutorial) - XEC Design](http://xecdesign.com/compiling-a-kernel/)
 * [Raspberry Pi • View topic - HOWTO: Virtual Raspbian on Qemu in Ubuntu Linux 12.10](http://www.raspberrypi.org/forums/viewtopic.php?f=29&t=37386)
+
+## Which compresser is good for raspbian image?
+
+Use [7-Zip](http://www.7-zip.org/) or  [XZ Utils](http://tukaani.org/xz/).
+
+```
+$ ls -l | sort -k 4
+total 7404464
+-rw-r--r-- 1 kiwamu kiwamu  713745179 Oct 24 08:05 2014-09-09-wheezy-raspbian_7zip.img.7z
+-rw-r--r-- 1 kiwamu kiwamu  724729008 Oct 24 07:35 2014-09-09-wheezy-raspbian_xz.img.xz
+-rw-r--r-- 1 kiwamu kiwamu  905643360 Oct 24 07:36 2014-09-09-wheezy-raspbian_bzip2.img.bz2
+-rw-r--r-- 1 kiwamu kiwamu  978848936 Oct 24 07:33 2014-09-09-wheezy-raspbian.zip
+-rw-r--r-- 1 kiwamu kiwamu  982368769 Oct 24 07:36 2014-09-09-wheezy-raspbian_gzip.img.gz
+-rw-r--r-- 1 kiwamu kiwamu 3276800000 Sep  9 09:42 2014-09-09-wheezy-raspbian.img
+```
+
