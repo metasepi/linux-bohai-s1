@@ -95,3 +95,4 @@ x509.genkey
 
 # Metasepi
 config.stamp
+config_qemu.stamp

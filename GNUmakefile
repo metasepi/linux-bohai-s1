@@ -19,9 +19,11 @@ config.stamp: ${FILE_CONFIG}
 
 config_qemu.stamp: ${FILE_CONFIG_QEMU}
 	cp ${FILE_CONFIG_QEMU} .config
+	patch -p1 < metasepi/ARM11_for_Versatile.patch
 	touch $@
 
 clean:
+	git checkout arch/arm/mach-versatile/Kconfig arch/arm/mm/Kconfig
 	rm -f config.stamp config_qemu.stamp .config
 	${MAKE} -f Makefile ${MAKE_OPT} clean
 # xxx TODO: target "writesd"
