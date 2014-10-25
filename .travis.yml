@@ -5,14 +5,12 @@ before_install:
 #  - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
 #  - unzip -x raspbian_latest.zip
 #  - mv *raspbian.img raspbian.img
-  - sudo sh -c 'echo deb http://archive.ubuntu.com/ubuntu/ raring main restricted universe multiverse >> /etc/apt/sources.list'
-  - sudo apt-get -qq -y update
-  - sudo apt-get -qq -y install libgmp-dev make xz-utils libfdt-dev ia32-libs
+  - sudo apt-get -qq -y install libgmp-dev make xz-utils libfdt-dev
   - sudo apt-get -qq -y build-dep qemu
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
   # Setup ARM cross toolchain
   - git clone https://github.com/raspberrypi/tools.git
-  - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi-
+  - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
   - ${RASPI_PREFIX}gcc --version
   - gcc --version
   # Setup ATS2
