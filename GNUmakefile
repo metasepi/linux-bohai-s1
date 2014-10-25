@@ -21,7 +21,7 @@ config.stamp: ${FILE_CONFIG}
 
 config_qemu.stamp: ${FILE_CONFIG_QEMU}
 	cp ${FILE_CONFIG_QEMU} .config
-	patch -p1 < metasepi/ARM11_for_Versatile.patch
+#	patch -p1 < metasepi/ARM11_for_Versatile.patch
 	touch $@
 
 clean:
