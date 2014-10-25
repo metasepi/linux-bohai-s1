@@ -25,14 +25,14 @@ before_install:
   - export PATH=${PATH}:${PATSHOME}/bin
   - (cd ${PATSHOME} && make -f codegen/Makefile_atslib && make -f Makefile_devl src_depend && make -f Makefile_devl all | grep -v 'gcc -I')
   - patsopt --version
-  # Setup emulation environment for Raspberry Pi
-  - export QEMU_VER=2.1
-  - wget http://cdn.debian.net/debian/pool/main/q/qemu/qemu_${QEMU_VER}+dfsg.orig.tar.xz
-  - tar xfJ qemu_${QEMU_VER}+dfsg.orig.tar.xz
-  - (cd qemu-${QEMU_VER}.0 && ./configure --disable-blobs --target-list=arm-softmmu)
-  - (cd qemu-${QEMU_VER}.0 && make -j ${NUMCPU} | grep -v ' CC ')
-  - (cd qemu-${QEMU_VER}.0 && sudo make install)
-  - qemu-system-arm --version
+#  # Setup emulation environment for Raspberry Pi
+#  - export QEMU_VER=2.1
+#  - wget http://cdn.debian.net/debian/pool/main/q/qemu/qemu_${QEMU_VER}+dfsg.orig.tar.xz
+#  - tar xfJ qemu_${QEMU_VER}+dfsg.orig.tar.xz
+#  - (cd qemu-${QEMU_VER}.0 && ./configure --disable-blobs --target-list=arm-softmmu)
+#  - (cd qemu-${QEMU_VER}.0 && make -j ${NUMCPU} | grep -v ' CC ')
+#  - (cd qemu-${QEMU_VER}.0 && sudo make install)
+#  - qemu-system-arm --version
 script:
   - cd ${TRAVIS_BUILD_DIR}
   - make build_qemu -j ${NUMCPU} | grep -v ' CC '
