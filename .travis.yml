@@ -2,14 +2,15 @@ before_install:
   - date
   - cat /proc/cpuinfo
   - cd ${HOME}
-  - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
-  - unzip -x raspbian_latest.zip
-  - sudo apt-get -qq -y install libgmp-dev make xz-utils libfdt-dev
+#  - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
+#  - unzip -x raspbian_latest.zip
+#  - mv *raspbian.img raspbian.img
+  - sudo apt-get -qq -y install libgmp-dev make xz-utils libfdt-dev ia32-libs
   - sudo apt-get -qq -y build-dep qemu
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
   # Setup ARM cross toolchain
   - git clone https://github.com/raspberrypi/tools.git
-  - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
+  - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi-
   - ${RASPI_PREFIX}gcc --version
   - gcc --version
   # Setup ATS2
@@ -32,10 +33,8 @@ before_install:
   - (cd qemu-${QEMU_VER}.0 && make -j ${NUMCPU} | grep -v ' CC ')
   - (cd qemu-${QEMU_VER}.0 && sudo make install)
   - qemu-system-arm --version
-  ## Expect unzip raspbian_latest.zip terminated
-  - mv *raspbian.img raspbian.img
 script:
   - cd ${TRAVIS_BUILD_DIR}
-  - make -j ${NUMCPU} | grep -v ' CC '
+  - make build_qemu -j ${NUMCPU} | grep -v ' CC '
 after_script:
   - date
