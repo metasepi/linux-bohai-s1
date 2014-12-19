@@ -796,6 +796,9 @@ void exit_aio(struct mm_struct *mm)
 	unsigned i = 0;
 
 	while (1) {
+		struct completion requests_done =
+			COMPLETION_INITIALIZER_ONSTACK(requests_done);
+
 		rcu_read_lock();
 		table = rcu_dereference(mm->ioctx_table);
 
@@ -823,7 +826,10 @@ void exit_aio(struct mm_struct *mm)
 		 */
 		ctx->mmap_size = 0;
 
-		kill_ioctx(mm, ctx, NULL);
+		kill_ioctx(mm, ctx, &requests_done);
+
+		/* Wait until all IO for the context are done. */
+		wait_for_completion(&requests_done);
 	}
 }
 
@@ -1064,6 +1070,12 @@ static long aio_read_events_ring(struct kioctx *ctx,
 	head = ring->head;
 	tail = ring->tail;
 	kunmap_atomic(ring);
+
+	/*
+	 * Ensure that once we've read the current tail pointer, that
+	 * we also see the events that were stored up to the tail.
+	 */
+	smp_rmb();
 
 	pr_debug("h%u t%u m%u\n", head, tail, ctx->nr_events);
 
