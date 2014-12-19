@@ -18,7 +18,7 @@ before_install:
   ## Build ATS1
   - export ATSHOME=${HOME}/ats-lang-anairiats-0.2.11
   - export ATSHOMERELOC=ATS-0.2.11
-  - ./ATS-Postiats/travis-ci/ats1_setup.sh 0.2.11 | grep -v 'gcc -I'
+  - ./ATS-Postiats/travis-ci/ats1_setup.sh 0.2.11 # | grep -v 'gcc -I'
   ## Build ATS2
   - export PATSHOME=${HOME}/ATS-Postiats
   - export PATSHOMERELOC=${PATSHOME}
