@@ -5,8 +5,8 @@ before_install:
 #  - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
 #  - unzip -x raspbian_latest.zip
 #  - mv *raspbian.img raspbian.img
+#  - sudo apt-get -qq -y build-dep qemu
   - sudo apt-get -qq -y install libgmp-dev make xz-utils libfdt-dev
-  - sudo apt-get -qq -y build-dep qemu
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
   # Setup ARM cross toolchain
   - git clone https://github.com/raspberrypi/tools.git
@@ -18,7 +18,7 @@ before_install:
   ## Build ATS1
   - export ATSHOME=${HOME}/ats-lang-anairiats-0.2.11
   - export ATSHOMERELOC=ATS-0.2.11
-  - ./ATS-Postiats/travis-ci/setup.sh 0.2.11 | grep -v 'gcc -I'
+  - ./ATS-Postiats/travis-ci/ats1_setup.sh 0.2.11 | grep -v 'gcc -I'
   ## Build ATS2
   - export PATSHOME=${HOME}/ATS-Postiats
   - export PATSHOMERELOC=${PATSHOME}
