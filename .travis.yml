@@ -1,0 +1,40 @@
+before_install:
+  - date
+  - cat /proc/cpuinfo
+  - cd ${HOME}
+#  - wget http://downloads.raspberrypi.org/raspbian_latest -O raspbian_latest.zip
+#  - unzip -x raspbian_latest.zip
+#  - mv *raspbian.img raspbian.img
+  - sudo apt-get -qq -y install libgmp-dev make xz-utils libfdt-dev
+  - sudo apt-get -qq -y build-dep qemu
+  - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
+  # Setup ARM cross toolchain
+  - git clone https://github.com/raspberrypi/tools.git
+  - export RASPI_PREFIX=${HOME}/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
+  - ${RASPI_PREFIX}gcc --version
+  - gcc --version
+  # Setup ATS2
+  - git clone https://github.com/githwxi/ATS-Postiats.git
+  ## Build ATS1
+  - export ATSHOME=${HOME}/ats-lang-anairiats-0.2.11
+  - export ATSHOMERELOC=ATS-0.2.11
+  - ./ATS-Postiats/travis-ci/setup.sh 0.2.11 | grep -v 'gcc -I'
+  ## Build ATS2
+  - export PATSHOME=${HOME}/ATS-Postiats
+  - export PATSHOMERELOC=${PATSHOME}
+  - export PATH=${PATH}:${PATSHOME}/bin
+  - (cd ${PATSHOME} && make -f codegen/Makefile_atslib && make -f Makefile_devl src_depend && make -f Makefile_devl all | grep -v 'gcc -I')
+  - patsopt --version
+#  # Setup emulation environment for Raspberry Pi
+#  - export QEMU_VER=2.1
+#  - wget http://cdn.debian.net/debian/pool/main/q/qemu/qemu_${QEMU_VER}+dfsg.orig.tar.xz
+#  - tar xfJ qemu_${QEMU_VER}+dfsg.orig.tar.xz
+#  - (cd qemu-${QEMU_VER}.0 && ./configure --disable-blobs --target-list=arm-softmmu)
+#  - (cd qemu-${QEMU_VER}.0 && make -j ${NUMCPU} | grep -v ' CC ')
+#  - (cd qemu-${QEMU_VER}.0 && sudo make install)
+#  - qemu-system-arm --version
+script:
+  - cd ${TRAVIS_BUILD_DIR}
+  - make build_qemu -j ${NUMCPU} | grep -v ' CC '
+after_script:
+  - date
