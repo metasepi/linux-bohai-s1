@@ -6,7 +6,7 @@ before_install:
 #  - unzip -x raspbian_latest.zip
 #  - mv *raspbian.img raspbian.img
 #  - sudo apt-get -qq -y build-dep qemu
-  - sudo apt-get -qq -y install libgc-dev libgmp-dev make xz-utils libfdt-dev
+  - sudo apt-get -qq -y install libgc-dev libgmp-dev make xz-utils bc libfdt-dev
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
   # Setup ARM cross toolchain
   - git clone https://github.com/raspberrypi/tools.git
