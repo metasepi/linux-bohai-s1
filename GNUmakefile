@@ -1,6 +1,7 @@
-# Makefile for metasepi system.
+# Makefile for Metasepi kernel
 FILE_CONFIG      = metasepi/2014-09-09-wheezy-raspbian.config
 MAKE_OPT         = ARCH=arm CROSS_COMPILE=${RASPI_PREFIX}
+WRITE_SD_SH      = metasepi/write_sd.sh
 
 all: build
 
@@ -17,6 +18,8 @@ clean:
 	git checkout arch/arm/mach-versatile/Kconfig arch/arm/mm/Kconfig
 	rm -f config.stamp .config
 	${MAKE} -f Makefile ${MAKE_OPT} clean
-# xxx TODO: target "writesd"
+
+writesd:
+	sh ${WRITE_SD_SH} ${SDDEV}
 
 .PHONY: build writesd clean
