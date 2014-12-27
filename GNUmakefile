@@ -7,7 +7,7 @@ all: build
 
 build: config.stamp
 	[ ! -z "${RASPI_PREFIX}" ]
-	${MAKE} -f Makefile ${MAKE_OPT}
+	${MAKE} -f Makefile ${MAKE_OPT} # KBUILD_VERBOSE=1
 	${MAKE} -f Makefile ${MAKE_OPT} INSTALL_MOD_PATH=modules_dir modules_install
 
 config.stamp: ${FILE_CONFIG}
