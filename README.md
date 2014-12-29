@@ -1,4 +1,4 @@
-# Linux Bohai - Season 1 (Raspberry Pi) [![Build Status](https://api.travis-ci.org/metasepi/linux-bohai-s1.svg)](https://travis-ci.org/metasepi/linux-bohai-s1/)
+# Linux Bohai - Season 1 [![Build Status](https://api.travis-ci.org/metasepi/linux-bohai-s1.svg)](https://travis-ci.org/metasepi/linux-bohai-s1/)
 
 ## Hardware specification
 
