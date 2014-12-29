@@ -7,7 +7,7 @@
 * Board name: [Raspberry Pi](http://www.raspberrypi.org/)
 * SoC: Broadcom [BCM2835](http://www.broadcom.com/products/BCM2835) (CPU, GPU, DSP, SDRAM, and single USB port)
 * CPU: 700 MHz [ARM1176JZF-S](http://www.arm.com/products/processors/classic/arm11/arm1176.php) core ([ARM11](http://en.wikipedia.org/wiki/ARM11) family, ARMv6 instruction set)
-* GPU: Broadcom VideoCore IV @ 250 MHz
+* GPU: Broadcom [VideoCore IV](http://www.broadcom.com/products/technology/mobmm_videocore.php) @ 250 MHz
 * Memory: 256 MB or 512 MB
 
 ## How to build
