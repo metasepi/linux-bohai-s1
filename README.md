@@ -1,13 +1,28 @@
 # Linux Bohai - Season 1 (for Raspberry Pi) [![Build Status](https://api.travis-ci.org/metasepi/linux-bohai-s1.svg)](https://travis-ci.org/metasepi/linux-bohai-s1/)
 
+## Hardware specification
+
+[![](metasepi/img/400px-Raspberry_Pi_Photo.jpg)](http://www.raspberrypi.org/)
+
+* Board name: [Raspberry Pi](http://www.raspberrypi.org/)
+* SoC: Broadcom BCM2835 (CPU, GPU, DSP, SDRAM, and single USB port)
+* CPU: 700 MHz [ARM1176JZF-S](http://www.arm.com/products/processors/classic/arm11/arm1176.php) core ([ARM11](http://en.wikipedia.org/wiki/ARM11) family, ARMv6 instruction set)
+* GPU: Broadcom VideoCore IV @ 250 MHz
+* Memory: 256 MB or 512 MB
+
 ## How to build
 
-First, get your own Debian PC.
+First, get your own [Debian](https://www.debian.org/) PC.
 
-Install ATS2.
+Install [ATS2](http://www.ats-lang.org/).
 
 ```
-xxx TODO xxx
+$ sudo apt-get -qq -y install libgc-dev libgmp-dev make xz-utils bc libfdt-dev
+$ git clone git://git.code.sf.net/p/ats2-lang/code ATS2-srcfrg
+$ export PATSHOMERELOC=${TRAVIS_BUILD_DIR}
+$ export PATSHOME=${HOME}/ATS2-srcfrg
+$ export PATH=${PATH}:${PATSHOME}/bin
+$ cd ${PATSHOME} && ./configure && make
 ```
 
 Install ARM cross toolchain.
@@ -26,6 +41,26 @@ $ git clone https://github.com/metasepi/linux-bohai-s1.git
 $ cd linux-bohai-s1
 $ make
 ```
+
+## How to install
+
+Write [Raspbian system image](http://www.raspberrypi.org/downloads/) into your SD card, that is connected with your PC.
+
+```
+$ wget http://downloads.raspberrypi.org/raspbian_latest
+$ unzip -x raspbian_latest
+$ sudo dd if=2014-12-24-wheezy-raspbian.img of=/dev/sdb bs=1M
+$ sync; sync; sync
+```
+
+Write Metasepi kernel into your SD card.
+
+```
+$ cd linux-bohai-s1
+$ make writesd SDDEV=/dev/sdb
+```
+
+Let's boot Metasepi kernel on your Raspberry Pi, while the SD card is inserted into the Raspberry Pi.
 
 ## How to snatch Linux kernel with ATS2
 
