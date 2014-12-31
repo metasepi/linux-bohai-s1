@@ -102,6 +102,7 @@ KBUILD_CFLAGS += $(warning)
 endif
 
 include scripts/Makefile.lib
+include metasepi/scripts/Makefile.ats
 
 ifdef host-progs
 ifneq ($(hostprogs-y),$(host-progs))

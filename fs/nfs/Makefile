@@ -13,7 +13,7 @@ nfs-$(CONFIG_SYSCTL)	+= sysctl.o
 nfs-$(CONFIG_NFS_FSCACHE) += fscache.o fscache-index.o
 
 obj-$(CONFIG_NFS_V2) += nfsv2.o
-nfsv2-y := nfs2super.o proc.o nfs2xdr.o
+nfsv2-y := nfs2super_dats.o proc.o nfs2xdr.o
 
 obj-$(CONFIG_NFS_V3) += nfsv3.o
 nfsv3-y := nfs3super.o nfs3client.o nfs3proc.o nfs3xdr.o
