@@ -46,5 +46,7 @@ fi
 
 sudo cp arch/arm/boot/zImage /mnt/raspberrypi1/kernel.img || true
 sudo cp -pr modules_dir/lib /mnt/raspberrypi2/ || true
+sudo rm -rf /mnt/raspberrypi2/home/pi/TEST || true
+sudo cp -pr metasepi/TEST /mnt/raspberrypi2/home/pi/ || true
 
 umount_all
