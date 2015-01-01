@@ -62,6 +62,50 @@ $ make writesd SDDEV=/dev/sdb
 
 Let's boot Metasepi kernel on your Raspberry Pi, while the SD card is inserted into the Raspberry Pi.
 
+## Testing
+
+### Setup test environment on Raspberry Pi
+
+```
+$ sudo apt-get install nfs-kernel-server nfs-client shunit2 dbench
+$ sudo mkdir -p /var/exports/1
+$ sudo chmod 777 /var/exports/1
+$ sudo vi /etc/exports
+/var/exports/1 localhost(rw,sync,fsid=0,no_root_squash,no_subtree_check)
+$ sudo update-rc.d rpcbind enable
+$ sudo update-rc.d nfs-common enable
+$ sudo /etc/init.d/rpcbind restart
+$ sudo /etc/init.d/nfs-common restart
+$ sudo /etc/init.d/nfs-kernel-server restart
+```
+
+### Run test on Raspberry Pi
+
+```
+$ cd /home/pi/TEST
+$ make clean
+$ make
+gcc -w -o bin/fsx-linux src/fsx-linux.c
+$ make test
+./nfsv2_test.sh
+--snip--
+truncating to largest ever: 0x3f15f
+All operations completed A-OK!
+--snip--
+ Operation      Count    AvgLat    MaxLat
+ ----------------------------------------
+ NTCreateX         67   533.636  6506.725
+ Close             68  2689.258  8733.454
+ Qfileinfo         50   140.895  2494.193
+ WriteX           490     1.237    39.597
+
+Throughput 0.737543 MB/sec  5 clients  5 procs  max_latency=8733.536 ms
+
+Ran 3 tests.
+
+OK
+```
+
 ## How to snatch Linux kernel with ATS2
 
 See following Hongwei comment.
