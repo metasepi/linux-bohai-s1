@@ -3,7 +3,10 @@
 EXPORT_PATH=/var/exports/1
 MNT_PATH=./mnt/1_nfs2
 DBENCH_NPROCS=5
-DBENCH_TIMELIMIT=60
+DBENCH_TIMELIMIT=40
+FSX=bin/fsx-linux
+FSX_ITERATIONS=800
+FSX_FILENAME=${MNT_PATH}/fsx_testfile
 
 oneTimeSetUp()
 {
@@ -20,6 +23,12 @@ oneTimeTearDown()
 testShowmount()
 {
     showmount localhost -e | grep ${EXPORT_PATH}
+    assertTrue $?
+}
+
+testFsx()
+{
+    ${FSX} -N ${FSX_ITERATIONS} ${FSX_FILENAME}
     assertTrue $?
 }
 
