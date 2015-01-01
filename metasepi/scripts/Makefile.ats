@@ -6,7 +6,7 @@ c_flags += -D_ATS_CCOMP_PRELUDE_NONE
 c_flags += -D_ATS_CCOMP_PRELUDE_USER='"H/pats_ccomp.h"'
 c_flags += -D_ATS_CCOMP_PRELUDE_USER2='"H/pats_ccomp2.h"'
 c_flags += -D_ATS_CCOMP_EXCEPTION_NONE
-c_flags += -I$(PATSHOME) -I$(PATSHOME)/ccomp/runtime -I${PATSHOMERELOC}/contrib -Imetasepi
+c_flags += -I$(PATSHOME) -I$(PATSHOME)/ccomp/runtime -I${PATSHOMERELOC}/contrib -Imetasepi -I.
 
 # Compile ATS2 source code
 $(src)/%_dats.c: metasepi/$(src)/DATS/%.dats

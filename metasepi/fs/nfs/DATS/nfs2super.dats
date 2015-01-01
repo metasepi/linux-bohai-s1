@@ -1,20 +1,19 @@
+(*
+ * Original: fs/nfs/nfs2super.c (ddda8e0aa8b955e20cb80908189bfa154ab54837)
+ * https://github.com/metasepi/linux-bohai-s1/blob/ddda8e0aa8b955e20cb80908189bfa154ab54837/fs/nfs/nfs2super.c
+ *)
 #define ATS_DYNLOADFLAG 0
 #include "share/atspre_define.hats"
 #include "metasepi/staloadall.hats"
+staload "metasepi/include/linux/SATS/module.sats"
+staload "metasepi/include/linux/SATS/nfs_fs.sats"
+staload "metasepi/fs/nfs/SATS/internal.sats"
+staload "metasepi/fs/nfs/SATS/nfs.sats"
 
 %{
 /*
- * Copy from fs/nfs/nfs2super.c (ddda8e0aa8b955e20cb80908189bfa154ab54837)
- * https://github.com/metasepi/linux-bohai-s1/blob/ddda8e0aa8b955e20cb80908189bfa154ab54837/fs/nfs/nfs2super.c
- */
-/*
  * Copyright (c) 2012 Netapp, Inc. All rights reserved.
  */
-#include <linux/module.h>
-#include <linux/nfs_fs.h>
-#include "internal.h"
-#include "nfs.h"
-
 static struct nfs_subversion nfs_v2 = {
 	.owner = THIS_MODULE,
 	.nfs_fs   = &nfs_fs_type,
