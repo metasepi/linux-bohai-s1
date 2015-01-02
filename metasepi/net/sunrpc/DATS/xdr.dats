@@ -1,3 +1,12 @@
+(*
+ * Original: net/sunrpc/xdr.c (347e2233b7667e336d9f671f1a52dfa3f0416e2c)
+ *)
+#define ATS_DYNLOADFLAG 0
+#include "share/atspre_define.hats"
+#include "metasepi/staloadall.hats"
+staload "metasepi/include/linux/SATS/module.sats"
+
+%{
 /*
  * linux/net/sunrpc/xdr.c
  *
@@ -1330,4 +1339,4 @@ out:
 	return ret;
 }
 EXPORT_SYMBOL_GPL(xdr_process_buf);
-
+%}
