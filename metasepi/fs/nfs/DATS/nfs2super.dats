@@ -1,6 +1,5 @@
 (*
  * Original: fs/nfs/nfs2super.c (ddda8e0aa8b955e20cb80908189bfa154ab54837)
- * https://github.com/metasepi/linux-bohai-s1/blob/ddda8e0aa8b955e20cb80908189bfa154ab54837/fs/nfs/nfs2super.c
  *)
 #define ATS_DYNLOADFLAG 0
 #include "share/atspre_define.hats"
@@ -9,6 +8,16 @@ staload "metasepi/include/linux/SATS/module.sats"
 staload "metasepi/include/linux/SATS/nfs_fs.sats"
 staload "metasepi/fs/nfs/SATS/internal.sats"
 staload "metasepi/fs/nfs/SATS/nfs.sats"
+
+var nfs_v2 = @{
+  owner=    the_null_ptr
+, nfs_fs=   the_null_ptr
+, rpc_vers= the_null_ptr
+, rpc_ops=  the_null_ptr
+, sops=     the_null_ptr
+, xattr=    the_null_ptr
+, list=     @{next=the_null_ptr, prev=the_null_ptr} : list_head_t
+} : nfs_subversion_t
 
 %{
 /*

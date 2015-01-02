@@ -39,4 +39,8 @@ staload _(*UN*) = "prelude/DATS/unsafe.dats"
 //
 (* ****** ****** *)
 
+staload "metasepi/include/linux/SATS/types.sats"
+
+(* ****** ****** *)
+
 (* end of [staloadall.hats] *)
