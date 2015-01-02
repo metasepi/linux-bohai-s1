@@ -18,7 +18,7 @@ Install [ATS2](http://www.ats-lang.org/).
 
 ```
 $ cd ${HOME}
-$ sudo apt-get -qq -y install libgc-dev libgmp-dev make bc
+$ sudo apt-get install libgc-dev libgmp-dev make bc
 $ git clone https://github.com/githwxi/ATS-Postiats-contrib.git
 $ export PATSHOMERELOC=${HOME}/ATS-Postiats-contrib
 $ git clone git://git.code.sf.net/p/ats2-lang/code ATS2-srcfrg
