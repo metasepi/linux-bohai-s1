@@ -1,7 +1,7 @@
 before_install:
   - date
   - cat /proc/cpuinfo
-  - sudo apt-get -qq -y install libgc-dev libgmp-dev make bc libfdt-dev
+  - sudo apt-get -qq -y install libgc-dev libgmp-dev make bc
   - export NUMCPU=`grep -c "^processor" < /proc/cpuinfo`
   # Setup ARM cross toolchain
   - cd ${HOME}
