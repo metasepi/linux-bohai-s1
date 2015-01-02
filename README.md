@@ -17,9 +17,11 @@ First, get your own [Debian](https://www.debian.org/) PC.
 Install [ATS2](http://www.ats-lang.org/).
 
 ```
-$ sudo apt-get -qq -y install libgc-dev libgmp-dev make xz-utils bc libfdt-dev
+$ cd ${HOME}
+$ sudo apt-get -qq -y install libgc-dev libgmp-dev make bc
+$ git clone https://github.com/githwxi/ATS-Postiats-contrib.git
+$ export PATSHOMERELOC=${HOME}/ATS-Postiats-contrib
 $ git clone git://git.code.sf.net/p/ats2-lang/code ATS2-srcfrg
-$ export PATSHOMERELOC=${TRAVIS_BUILD_DIR}
 $ export PATSHOME=${HOME}/ATS2-srcfrg
 $ export PATH=${PATH}:${PATSHOME}/bin
 $ cd ${PATSHOME} && ./configure && make
