@@ -17,7 +17,7 @@ var nfs_v2 = @{
 , sops=     nfs_sops_p
 , xattr=    the_null_ptr
 , list=     @{next=the_null_ptr, prev=the_null_ptr} : list_head_t
-} : nfs_subversion_t
+} : nfs_subversion_t // xxx not yet used
 
 %{
 /*
