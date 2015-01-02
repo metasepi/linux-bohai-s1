@@ -18,7 +18,7 @@ before_install:
   - git clone git://git.code.sf.net/p/ats2-lang/code ATS2-srcfrg
   - export PATSHOME=${HOME}/ATS2-srcfrg
   - export PATH=${PATH}:${PATSHOME}/bin
-  - cd ${PATSHOME} && ./configure && make -j ${NUMCPU}
+  - cd ${PATSHOME} && ./configure && make
   - patsopt --version
 script:
   - cd ${TRAVIS_BUILD_DIR}
