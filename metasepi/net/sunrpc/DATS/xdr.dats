@@ -5,6 +5,15 @@
 #include "share/atspre_define.hats"
 #include "metasepi/staloadall.hats"
 staload "metasepi/include/linux/SATS/module.sats"
+staload "metasepi/include/linux/SATS/slab.sats"
+staload "metasepi/include/linux/SATS/types.sats"
+staload "metasepi/include/linux/SATS/string.sats"
+staload "metasepi/include/linux/SATS/kernel.sats"
+staload "metasepi/include/linux/SATS/pagemap.sats"
+staload "metasepi/include/linux/SATS/errno.sats"
+staload "metasepi/include/linux/sunrpc/SATS/xdr.sats"
+staload "metasepi/include/linux/sunrpc/SATS/msg_prot.sats"
+
 
 %{
 /*
@@ -14,17 +23,6 @@ staload "metasepi/include/linux/SATS/module.sats"
  *
  * Copyright (C) 1995, 1996 Olaf Kirch <okir@monad.swb.de>
  */
-
-#include <linux/module.h>
-#include <linux/slab.h>
-#include <linux/types.h>
-#include <linux/string.h>
-#include <linux/kernel.h>
-#include <linux/pagemap.h>
-#include <linux/errno.h>
-#include <linux/sunrpc/xdr.h>
-#include <linux/sunrpc/msg_prot.h>
-
 /*
  * XDR functions for basic NFS types
  */
