@@ -14,18 +14,13 @@ staload "metasepi/include/linux/SATS/errno.sats"
 staload "metasepi/include/linux/sunrpc/SATS/xdr.sats"
 staload "metasepi/include/linux/sunrpc/SATS/msg_prot.sats"
 
+staload UN = "prelude/SATS/unsafe.sats"
 
-%{
-/*
- * linux/net/sunrpc/xdr.c
- *
- * Generic XDR support.
- *
- * Copyright (C) 1995, 1996 Olaf Kirch <okir@monad.swb.de>
- */
-/*
+(*
  * XDR functions for basic NFS types
- */
+ *)
+implement xdr_encode_netobj(p, xp) = $UN.cast the_null_ptr // xxx
+%{
 __be32 *
 xdr_encode_netobj(__be32 *p, const struct xdr_netobj *obj)
 {
@@ -36,8 +31,20 @@ xdr_encode_netobj(__be32 *p, const struct xdr_netobj *obj)
 	memcpy(p, obj->data, obj->len);
 	return p + XDR_QUADLEN(obj->len);
 }
-EXPORT_SYMBOL_GPL(xdr_encode_netobj);
+%}
 
+%{
+EXPORT_SYMBOL_GPL(xdr_encode_netobj);
+%}
+
+%{
+/*
+ * linux/net/sunrpc/xdr.c
+ *
+ * Generic XDR support.
+ *
+ * Copyright (C) 1995, 1996 Olaf Kirch <okir@monad.swb.de>
+ */
 __be32 *
 xdr_decode_netobj(__be32 *p, struct xdr_netobj *obj)
 {
