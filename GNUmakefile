@@ -7,16 +7,17 @@ all: build
 
 build: config.stamp
 	[ ! -z "${RASPI_PREFIX}" ]
+	yes "" | ${MAKE} -f Makefile ${MAKE_OPT} oldconfig
 	${MAKE} -f Makefile ${MAKE_OPT} # KBUILD_VERBOSE=1
 	${MAKE} -f Makefile ${MAKE_OPT} INSTALL_MOD_PATH=modules_dir modules_install
 
 config.stamp: ${FILE_CONFIG}
-	cp ${FILE_CONFIG} .config
+	#sed -e 's/=m$$/=y/g' ${FILE_CONFIG} > .config # For single binary kernel
+	cp ${FILE_CONFIG} .config # For modularized kernel
 	touch $@
 
 clean:
-	git checkout arch/arm/mach-versatile/Kconfig arch/arm/mm/Kconfig
-	rm -f config.stamp .config
+	rm -f *.stamp .config .config.old
 	${MAKE} -f Makefile ${MAKE_OPT} clean
 
 writesd:
