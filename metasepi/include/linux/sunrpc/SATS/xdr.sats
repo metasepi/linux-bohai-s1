@@ -15,5 +15,5 @@ typedef xdr_netobj_t = $extype_struct"struct xdr_netobj" of {
 fun XDR_QUADLEN (x: uint): uint = "mac#"
 
 fun xdr_encode_netobj
-  {n:int}
-  (p: !arrayptr(__be32, n), xp: cPtr1(xdr_netobj_t)): cPtr1(__be32) // xxx Not correct
+  {n:int}{l:addr}
+  (!xdr_netobj_t @ l | p: !arrayptr(__be32, n), xp: ptr l): cPtr1(__be32) // xxx Not correct

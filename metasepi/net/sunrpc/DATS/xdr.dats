@@ -19,7 +19,7 @@ staload UN = "prelude/SATS/unsafe.sats"
 (*
  * XDR functions for basic NFS types
  *)
-implement xdr_encode_netobj(p, xp) = $UN.cast the_null_ptr // xxx
+implement xdr_encode_netobj(pfat | p, xp) = $UN.cast the_null_ptr // xxx
 %{
 __be32 *
 xdr_encode_netobj(__be32 *p, const struct xdr_netobj *obj)
