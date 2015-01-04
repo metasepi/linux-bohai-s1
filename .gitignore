@@ -94,6 +94,6 @@ signing_key.x509
 x509.genkey
 
 # Metasepi
-config.stamp
-config_qemu.stamp
 /modules_dir/
+/*.stamp
+*_dats.c
