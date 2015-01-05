@@ -16,4 +16,4 @@ fun XDR_QUADLEN (x: uint): uint = "mac#"
 
 fun xdr_encode_netobj
   {n:int}{l:addr}
-  (!xdr_netobj_t @ l | p: !arrayptr(__be32, n), xp: ptr l): cPtr1(__be32) // xxx Not correct
+  (!xdr_netobj_t @ l | p: arrayptr(__be32, n), xp: ptr l): arrayptr(__be32, n) // xxx Not correct
