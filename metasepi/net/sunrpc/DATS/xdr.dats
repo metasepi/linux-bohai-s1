@@ -27,20 +27,12 @@ implement xdr_encode_netobj(objat | p, obj) = $UN.castvwtp0(r) where {
   val _  = memcpy(ptr_succ<__be32>(arrayptr2ptr(p)), obj->data, $UN.cast(obj->len))
   val r  = ptr_add<__be32>(arrayptr2ptr(p), quadlen+1U)
 }
-%{
+%{$
 __be32 *
 xdr_encode_netobj(__be32 *p, const struct xdr_netobj *obj)
 {
-	unsigned int	quadlen = XDR_QUADLEN(obj->len);
-
-	p[quadlen] = 0;		/* zero trailing bytes */
-	*p++ = cpu_to_be32(obj->len);
-	memcpy(p, obj->data, obj->len);
-	return p + XDR_QUADLEN(obj->len);
+	return ((__be32 *) ats_xdr_encode_netobj((void *) p, (void *) obj));
 }
-%}
-
-%{
 EXPORT_SYMBOL_GPL(xdr_encode_netobj);
 %}
 
