@@ -19,8 +19,13 @@ staload UN = "prelude/SATS/unsafe.sats"
 (*
  * XDR functions for basic NFS types
  *)
-implement xdr_encode_netobj(xpfat | p, xp) = $UN.castvwtp0(the_null_ptr) where {
-  prval () = $UN.castvwtp0(p) (* Consume "p" *)
+extern fun memcpy (d:ptr, s:ptr, n:size_t): ptr = "mac#" // xxx UNSAFE
+implement xdr_encode_netobj(objat | p, obj) = $UN.castvwtp0(r) where {
+  val quadlen = XDR_QUADLEN(obj->len)
+  val () = p[quadlen] := $UN.cast(0U)
+  val () = p[0] := cpu_to_be32(obj->len)
+  val _  = memcpy(ptr_succ<__be32>(arrayptr2ptr(p)), obj->data, $UN.cast(obj->len))
+  val r  = ptr_add<__be32>(arrayptr2ptr(p), quadlen+1U)
 }
 %{
 __be32 *

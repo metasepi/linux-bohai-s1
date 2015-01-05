@@ -7,13 +7,13 @@
 staload "metasepi/include/linux/SATS/types.sats"
 
 #define XDR_MAX_NETOBJ 1024
-typedef xdr_netobj_t = $extype_struct"struct xdr_netobj" of {
-  len=  uint
+typedef xdr_netobj_t(i:int) = $extype_struct"struct xdr_netobj" of {
+  len=  uint(i)
 , data= ptr // xxx
 }
 
-fun XDR_QUADLEN (x: uint): uint = "mac#"
-
+fun XDR_QUADLEN {n:nat}
+  (x: uint(n)): uint((n+3)/4) = "mac#"
 fun xdr_encode_netobj
-  {n:int}{l:addr}
-  (!xdr_netobj_t @ l | p: arrayptr(__be32, n), xp: ptr l): arrayptr(__be32, n) // xxx Not correct
+  {l:addr}{n:int | n > 0}{m:int | (m-1)*4 <= n && n < m*4}{o:int | o > m+1}
+  (!xdr_netobj_t(n) @ l | p: !arrayptr(__be32, o), obj: ptr(l)): arrayptr(__be32, o-m-1) = "ext#%"

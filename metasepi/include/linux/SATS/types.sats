@@ -7,7 +7,6 @@
 
 typedef __be32 = uint32
 
-fun memcpy (d:ptr, s:ptr, n:size_t): ptr = "mac#" // xxx UNSAFE
 fun cpu_to_be32 (x: uint): __be32 = "mac#"
 
 typedef list_head_t = $extype_struct"struct list_head" of {
