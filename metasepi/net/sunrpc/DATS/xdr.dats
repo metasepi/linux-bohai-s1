@@ -34,16 +34,7 @@ xdr_encode_netobj(__be32 *p, const struct xdr_netobj *obj)
 	return ((__be32 *) ats_xdr_encode_netobj((void *) p, (void *) obj));
 }
 EXPORT_SYMBOL_GPL(xdr_encode_netobj);
-%}
 
-%{
-/*
- * linux/net/sunrpc/xdr.c
- *
- * Generic XDR support.
- *
- * Copyright (C) 1995, 1996 Olaf Kirch <okir@monad.swb.de>
- */
 __be32 *
 xdr_decode_netobj(__be32 *p, struct xdr_netobj *obj)
 {
@@ -56,7 +47,9 @@ xdr_decode_netobj(__be32 *p, struct xdr_netobj *obj)
 	return p + XDR_QUADLEN(len);
 }
 EXPORT_SYMBOL_GPL(xdr_decode_netobj);
+%}
 
+%{$
 /**
  * xdr_encode_opaque_fixed - Encode fixed length opaque data
  * @p: pointer to current position in XDR buffer.
@@ -86,7 +79,16 @@ __be32 *xdr_encode_opaque_fixed(__be32 *p, const void *ptr, unsigned int nbytes)
 	return p;
 }
 EXPORT_SYMBOL_GPL(xdr_encode_opaque_fixed);
+%}
 
+%{
+/*
+ * linux/net/sunrpc/xdr.c
+ *
+ * Generic XDR support.
+ *
+ * Copyright (C) 1995, 1996 Olaf Kirch <okir@monad.swb.de>
+ */
 /**
  * xdr_encode_opaque - Encode variable length opaque data
  * @p: pointer to current position in XDR buffer.
