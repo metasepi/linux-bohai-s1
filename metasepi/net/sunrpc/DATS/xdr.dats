@@ -34,7 +34,6 @@ xdr_encode_netobj(__be32 *p, const struct xdr_netobj *obj)
 {
 	return ((__be32 *) ats_xdr_encode_netobj((void *) p, (void *) obj));
 }
-EXPORT_SYMBOL_GPL(xdr_encode_netobj);
 
 __be32 *
 xdr_decode_netobj(__be32 *p, struct xdr_netobj *obj)
@@ -47,7 +46,6 @@ xdr_decode_netobj(__be32 *p, struct xdr_netobj *obj)
 	obj->data = (u8 *) p;
 	return p + XDR_QUADLEN(len);
 }
-EXPORT_SYMBOL_GPL(xdr_decode_netobj);
 %}
 
 (**
@@ -78,7 +76,6 @@ __be32 *xdr_encode_opaque_fixed(__be32 *p, const void *ptr, unsigned int nbytes)
 	}
 	return p;
 }
-EXPORT_SYMBOL_GPL(xdr_encode_opaque_fixed);
 %}
 
 %{
