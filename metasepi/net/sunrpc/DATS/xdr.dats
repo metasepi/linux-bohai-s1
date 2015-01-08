@@ -26,6 +26,7 @@ implement xdr_encode_netobj(objat | p, obj) = $UN.castvwtp0(r) where {
   val () = p[0] := cpu_to_be32(obj->len)
   val _  = memcpy(ptr_succ<__be32>(arrayptr2ptr(p)), obj->data, $UN.cast(obj->len))
   val r  = ptr_add<__be32>(arrayptr2ptr(p), quadlen+1U)
+  val () = $UN.castvwtp0(p)
 }
 %{$
 __be32 *
@@ -49,8 +50,7 @@ xdr_decode_netobj(__be32 *p, struct xdr_netobj *obj)
 EXPORT_SYMBOL_GPL(xdr_decode_netobj);
 %}
 
-%{$
-/**
+(**
  * xdr_encode_opaque_fixed - Encode fixed length opaque data
  * @p: pointer to current position in XDR buffer.
  * @ptr: pointer to data to encode (or NULL)
@@ -62,8 +62,8 @@ EXPORT_SYMBOL_GPL(xdr_decode_netobj);
  * Note: if ptr is NULL, only the padding is performed.
  *
  * Returns the updated current XDR buffer position
- *
- */
+ *)
+%{$
 __be32 *xdr_encode_opaque_fixed(__be32 *p, const void *ptr, unsigned int nbytes)
 {
 	if (likely(nbytes != 0)) {
