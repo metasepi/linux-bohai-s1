@@ -69,7 +69,7 @@ implement xdr_encode_opaque_fixed(p, pt, pt_len) =
     val quadlen = XDR_QUADLEN(pt_len)
     val padding = (quadlen << 2) - pt_len
     val ps = arrayptr2ptr(p)
-    val () = if ptr_is_null pt then () where {
+    val () = if ptr_isnot_null pt then () where { // xxx DANGER!
                val _ = memcpy(ps, pt, u2sz(pt_len))
              }
     val () = if padding > 0 then () where {
@@ -81,17 +81,7 @@ implement xdr_encode_opaque_fixed(p, pt, pt_len) =
 %{$
 __be32 *xdr_encode_opaque_fixed(__be32 *p, const void *ptr, unsigned int nbytes)
 {
-	if (likely(nbytes != 0)) {
-		unsigned int quadlen = XDR_QUADLEN(nbytes);
-		unsigned int padding = (quadlen << 2) - nbytes;
-
-		if (ptr != NULL)
-			memcpy(p, ptr, nbytes);
-		if (padding != 0)
-			memset((char *)p + nbytes, 0, padding);
-		p += quadlen;
-	}
-	return p;
+	return ((__be32 *) ats_xdr_encode_opaque_fixed((void *) p, (void *) ptr, nbytes));
 }
 %}
 
