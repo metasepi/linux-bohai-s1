@@ -85,6 +85,22 @@ __be32 *xdr_encode_opaque_fixed(__be32 *p, const void *ptr, unsigned int nbytes)
 }
 %}
 
+(**
+ * xdr_encode_opaque - Encode variable length opaque data
+ * @p: pointer to current position in XDR buffer.
+ * @ptr: pointer to data to encode (or NULL)
+ * @nbytes: size of data.
+ *
+ * Returns the updated current XDR buffer position
+ *)
+%{$
+__be32 *xdr_encode_opaque(__be32 *p, const void *ptr, unsigned int nbytes)
+{
+	*p++ = cpu_to_be32(nbytes);
+	return xdr_encode_opaque_fixed(p, ptr, nbytes);
+}
+%}
+
 %{
 /*
  * linux/net/sunrpc/xdr.c
@@ -93,21 +109,6 @@ __be32 *xdr_encode_opaque_fixed(__be32 *p, const void *ptr, unsigned int nbytes)
  *
  * Copyright (C) 1995, 1996 Olaf Kirch <okir@monad.swb.de>
  */
-/**
- * xdr_encode_opaque - Encode variable length opaque data
- * @p: pointer to current position in XDR buffer.
- * @ptr: pointer to data to encode (or NULL)
- * @nbytes: size of data.
- *
- * Returns the updated current XDR buffer position
- */
-__be32 *xdr_encode_opaque(__be32 *p, const void *ptr, unsigned int nbytes)
-{
-	*p++ = cpu_to_be32(nbytes);
-	return xdr_encode_opaque_fixed(p, ptr, nbytes);
-}
-EXPORT_SYMBOL_GPL(xdr_encode_opaque);
-
 __be32 *
 xdr_encode_string(__be32 *p, const char *string)
 {
