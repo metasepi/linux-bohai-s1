@@ -26,11 +26,11 @@ testShowmount()
     assertTrue $?
 }
 
-testFilelock()
-{
+#testFilelock()
+#{
 #    flock --timeout 10 ${MNT_PATH}/lockfile echo "flocked!"
 #    assertTrue $?
-}
+#}
 
 testFsx()
 {
