@@ -108,6 +108,13 @@ Ran 3 tests.
 OK
 ```
 
+## How to use kernel debugger (KDB)
+
+xxx TODO
+
+* [KDB - eLinux.org](http://elinux.org/KDB)
+* [Using kgdb, kdb and the kernel debugger internals](https://www.kernel.org/pub/linux/kernel/people/jwessel/kdb/)
+
 ## How to snatch Linux kernel with ATS2
 
 See following Hongwei comment.
@@ -194,4 +201,3 @@ Compressed: 713745179
 82.14user 4.09system 1:28.81elapsed 97%CPU (0avgtext+0avgdata 10412maxresident)k
 1402832inputs+4740856outputs (2major+2156minor)pagefaults 0swaps
 ```
-
