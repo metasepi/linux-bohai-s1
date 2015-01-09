@@ -18,6 +18,6 @@ fun xdr_encode_netobj
   {l:addr}{n:int | n > 0}{m:int | (m-1)*4 <= n && n < m*4}{o:int | o >= m+1}
   (!xdr_netobj_t(n) @ l | p: arrayptr(__be32, o), obj: ptr(l)): arrayptr(__be32, o-m-1) = "ext#ats_xdr_encode_netobj"
 // xxx fun xdr_decode_netobj ...
-fun xdr_encode_opaque_fixed
+fun xdr_encode_opaque_fixed // xxx Type "ptr" is too weak.
    {n:int | n > 0}{m:int | (m-1)*4 <= n && n < m*4}{o:int | o >= m}
    (p: arrayptr(__be32, o), pt: ptr, pt_len: uint(n)): arrayptr(__be32, o-m) = "ext#ats_xdr_encode_opaque_fixed"

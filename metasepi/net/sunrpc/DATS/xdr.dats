@@ -16,10 +16,12 @@ staload "metasepi/include/linux/sunrpc/SATS/msg_prot.sats"
 
 staload UN = "prelude/SATS/unsafe.sats"
 
+extern fun memcpy (d:ptr, s:ptr, n:size_t): ptr = "mac#" // xxx UNSAFE
+extern fun memset (s:ptr, c:int, n:size_t): ptr = "mac#" // xxx UNSAFE
+
 (*
  * XDR functions for basic NFS types
  *)
-extern fun memcpy (d:ptr, s:ptr, n:size_t): ptr = "mac#" // xxx UNSAFE
 implement xdr_encode_netobj(objat | p, obj) = $UN.castvwtp0(r) where {
   val quadlen = XDR_QUADLEN(obj->len)
   val () = p[quadlen] := $UN.cast(0U)
@@ -61,6 +63,21 @@ xdr_decode_netobj(__be32 *p, struct xdr_netobj *obj)
  *
  * Returns the updated current XDR buffer position
  *)
+implement xdr_encode_opaque_fixed(p, pt, pt_len) =
+  if pt_len <= 0 then p // xxx The "if" should be removed with dependent types.
+  else $UN.castvwtp0(r) where {
+    val quadlen = XDR_QUADLEN(pt_len)
+    val padding = (quadlen << 2) - pt_len
+    val ps = arrayptr2ptr(p)
+    val () = if ptr_is_null pt then () where {
+               val _ = memcpy(ps, pt, u2sz(pt_len))
+             }
+    val () = if padding > 0 then () where {
+               val _ = memset(ptr_add<char>(ps, u2sz(pt_len)), 0, $UN.cast(padding))
+             }
+    val r = ptr_add<__be32>(ps, quadlen)
+    val () = $UN.castvwtp0(p)
+}
 %{$
 __be32 *xdr_encode_opaque_fixed(__be32 *p, const void *ptr, unsigned int nbytes)
 {
